@@ -1,0 +1,41 @@
+#
+# Warren package
+#
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ocpi-playground"
+description = "A playground for OCPI-related development"
+readme = "../README.md"
+authors = [
+  { name="Julien Maupetit", email="julien.maupetit@beta.gouv.fr" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.9"
+license = {file = "../LICENSE"}
+keywords = ["OCPI"]
+dependencies = [
+    "polyfactory==2.15.0",
+    "py-ocpi==0.3.1",
+    "uvicorn[standard]==0.28.0",
+]
+dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/MTES-MCT/ocpi-playground"
+"Bug Tracker" = "https://github.com/MTES-MCT/ocpi-playground/issues"
+
+[tool.setuptools.dynamic]
+version = { attr = "playground.__version__" }
