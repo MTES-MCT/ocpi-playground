@@ -16,7 +16,7 @@ WORKDIR /app
 
 COPY . /app/
 
-RUN pip install -e .
+RUN pip install -e .[dev]
 
 # -- demo --
 FROM core as demo

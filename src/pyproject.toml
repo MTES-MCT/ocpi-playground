@@ -37,5 +37,23 @@ dynamic = ["version"]
 "Homepage" = "https://github.com/MTES-MCT/ocpi-playground"
 "Bug Tracker" = "https://github.com/MTES-MCT/ocpi-playground/issues"
 
+[project.optional-dependencies]
+dev = [
+    "freezegun==1.4.0",
+    "pytest==7.4.4",
+]
+
 [tool.setuptools.dynamic]
 version = { attr = "playground.__version__" }
+
+# Third party packages configuration
+[tool.pytest.ini_options]
+addopts = "-v"
+python_files = [
+    "test_*.py",
+    "tests.py",
+]
+testpaths = [
+    "tests",
+]
+
