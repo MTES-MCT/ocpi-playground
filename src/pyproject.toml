@@ -39,8 +39,10 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = [
-    "freezegun==1.4.0",
+    "black==24.2.0",
+    "mypy==1.9.0",
     "pytest==7.4.4",
+    "ruff==0.3.2",
 ]
 
 [tool.setuptools.dynamic]
@@ -57,3 +59,39 @@ testpaths = [
     "tests",
 ]
 
+[tool.ruff.lint]
+select = [
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "D",  # pydocstyle
+    "E",  # pycodestyle error
+    "F",  # Pyflakes
+    "I",  # Isort
+    "ISC",  # flake8-implicit-str-concat
+    "PLC",  # Pylint Convention
+    "PLE",  # Pylint Error
+    "PLR",  # Pylint Refactor
+    "PLW",  # Pylint Warning
+    "RUF100",  # Ruff unused-noqa
+    "S",  # flake8-bandit
+    "T20", # flake8-print
+    "W",  # pycodestyle warning
+]
+
+[tool.ruff.lint.pydocstyle]
+# Use Google-style docstrings.
+convention = "google"
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.params.Depends", "fastapi.Query", "fastapi.params.Query"]
+
+[tool.mypy]
+plugins = "pydantic.mypy"
+files = "./**/*.py"
+exclude = ["/tests/"]
+
+[[tool.mypy.overrides]]
+module = [
+    "py_ocpi.*",
+]
+ignore_missing_imports = true
