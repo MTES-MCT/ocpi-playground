@@ -1,7 +1,9 @@
 """Factories for OCPI models."""
 
+import inspect
+import sys
 from datetime import timedelta
-from typing import Any, Dict, Type
+from typing import Any, Dict, Optional, Type
 
 from faker import Faker
 from faker.providers import date_time, lorem, python
@@ -21,7 +23,7 @@ fake.add_provider(lorem)
 fake.add_provider(python)
 
 
-def generate_price(
+def generate_price(  # noqa: PLR0913
     left_digits=2,
     right_digits=4,
     positive=True,
@@ -29,7 +31,7 @@ def generate_price(
     max_value=100,
     vat_rate=0.2,
 ):
-    """Generate a random price"""
+    """Generate a random price."""
     excl_vat = fake.pyfloat(left_digits, right_digits, positive, min_value, max_value)
     incl_vat = excl_vat * (1 + vat_rate)
     return {"excl_vat": excl_vat, "incl_vat": incl_vat}
@@ -40,6 +42,7 @@ class OCPIDataTypesMixin:
 
     @classmethod
     def get_provider_map(cls) -> Dict[Type, Any]:
+        """Update provider map with py_ocpi custom types."""
         providers_map = super().get_provider_map()
 
         return {
@@ -55,31 +58,44 @@ class OCPIDataTypesMixin:
 class CdrFactory(OCPIDataTypesMixin, ModelFactory[Cdr]):
     """Cdr model factory."""
 
+    _module: ModuleID = ModuleID.cdrs
+
 
 class CredentialsFactory(OCPIDataTypesMixin, ModelFactory[Credentials]):
     """Credentials model factory."""
+
+    _module: ModuleID = ModuleID.credentials_and_registration
 
 
 class LocationFactory(OCPIDataTypesMixin, ModelFactory[Location]):
     """Location model factory."""
 
+    _module: ModuleID = ModuleID.locations
+
 
 class SessionFactory(OCPIDataTypesMixin, ModelFactory[Session]):
     """Session model factory."""
+
+    _module: ModuleID = ModuleID.sessions
 
 
 class TariffFactory(OCPIDataTypesMixin, ModelFactory[Tariff]):
     """Tariff model factory."""
 
+    _module: ModuleID = ModuleID.tariffs
+
 
 class TokenFactory(OCPIDataTypesMixin, ModelFactory[Token]):
     """Token model factory."""
 
+    _module: ModuleID = ModuleID.tokens
 
-def get_factory(module: ModuleID):
+
+def get_factory(module: ModuleID) -> Optional[ModelFactory]:
     """Get the factory for a given module."""
-    factory_name = module.value
-    if module.value != "credentials":
-        factory_name = module.value.rstrip("s")
-    factory_name = factory_name.title() + "Factory"
-    return eval(factory_name)
+    for _, obj in inspect.getmembers(sys.modules[__name__]):
+        if not inspect.isclass(obj):
+            continue
+        if hasattr(obj, "_module") and obj._module == module:
+            return obj
+    return None

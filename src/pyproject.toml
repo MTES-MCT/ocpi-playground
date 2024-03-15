@@ -78,6 +78,11 @@ select = [
     "W",  # pycodestyle warning
 ]
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "S101", # use of assert
+]
+
 [tool.ruff.lint.pydocstyle]
 # Use Google-style docstrings.
 convention = "google"
