@@ -1,0 +1,2 @@
+OCPI_HOST="localhost:8010"
+PLAYGROUND_ROLES="cpo"

@@ -1,0 +1,2 @@
+OCPI_HOST="localhost:8011"
+PLAYGROUND_ROLES="emsp"

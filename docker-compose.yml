@@ -11,6 +11,16 @@ services:
     user: ${DOCKER_USER:-1000}
     image: "ocpi:demo"
     ports:
-      - "8000:8000"
+      - "8010:8000"
     volumes:
       - ./src:/app
+      - ./env.d/cpo:/app/.env
+
+  emsp:
+    user: ${DOCKER_USER:-1000}
+    image: "ocpi:demo"
+    ports:
+      - "8011:8000"
+    volumes:
+      - ./src:/app
+      - ./env.d/emsp:/app/.env

@@ -22,7 +22,7 @@ build: ## build the app container(s)
 .PHONY: build
 
 logs: ## display OCPI server logs (follow mode)
-	@$(COMPOSE) logs -f cpo
+	@$(COMPOSE) logs -f
 .PHONY: logs
 
 run: ## run the whole stack

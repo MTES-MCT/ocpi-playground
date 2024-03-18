@@ -13,9 +13,13 @@ from py_ocpi.modules.tariffs.v_2_2_1.schemas import Tariff
 from py_ocpi.modules.tokens.v_2_2_1.schemas import Token
 from py_ocpi.modules.versions.enums import VersionNumber
 
+from .conf import settings
 from .factories import OCPIModelFactory, get_factory
 
 logger = logging.getLogger(__name__)
+
+# Debug
+logger.debug(f"{settings=}")
 
 
 class Crud:
@@ -117,4 +121,4 @@ class Adapter:
         return Token(**data)
 
 
-app = get_application([VersionNumber.v_2_2_1], [RoleEnum.cpo], Crud, Adapter)
+app = get_application([VersionNumber.v_2_2_1], settings.ROLES, Crud, Adapter)
