@@ -13,7 +13,7 @@ from py_ocpi.modules.tariffs.v_2_2_1.schemas import Tariff
 from py_ocpi.modules.tokens.v_2_2_1.schemas import Token
 from py_ocpi.modules.versions.enums import VersionNumber
 
-from .factories import get_factory
+from .factories import OCPIModelFactory, get_factory
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +26,7 @@ class Crud:
     @classmethod
     async def get(cls, module: ModuleID, role: RoleEnum, id, *args, **kwargs) -> Any:
         """Get module."""
-        factory = get_factory(module)
+        factory: OCPIModelFactory = get_factory(module)
         cls.logger.debug(f"{factory=}")
         return factory.build(id=id).dict()
 
@@ -39,7 +39,7 @@ class Crud:
         Returns a tuple with the object list, the total number of objects and
         a boolean to indicate weither its the last page or not.
         """
-        factory = get_factory(module)
+        factory: OCPIModelFactory = get_factory(module)
         cls.logger.debug(f"{factory=}")
         data = [item.dict() for item in factory.batch(5)]
         return (data, 5, True)
@@ -70,7 +70,7 @@ class Crud:
         role: RoleEnum,
         action: Action,
         *args,
-        data: dict = None,
+        data: dict = None,  # type: ignore[assignment]
         **kwargs,
     ) -> Any:
         """Perform an action on module."""
