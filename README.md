@@ -1,5 +1,7 @@
 # OCPI Playground
 
+⚠️ This project is still a WIP under active development ⚠️
+
 This project aims to be a demonstration of OCPI servers topologies. It can be
 used as an integration example of the
 [`py-ocpi`](https://github.com/TECHS-Technological-Solutions/ocpi/tree/master)
