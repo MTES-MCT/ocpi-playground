@@ -9,7 +9,6 @@ build-backend = "poetry.core.masonry.api"
 name = "ocpi-playground"
 version = "0.0.1"
 description = "A playground for OCPI-related development"
-readme = "../README.md"
 authors = [
   "Julien Maupetit <julien.maupetit@beta.gouv.fr>",
 ]
