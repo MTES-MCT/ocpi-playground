@@ -1,16 +1,17 @@
 #
-# Warren package
+# OCPI-Playground package
 #
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
+[tool.poetry]
 name = "ocpi-playground"
+version = "0.0.1"
 description = "A playground for OCPI-related development"
 readme = "../README.md"
 authors = [
-  { name="Julien Maupetit", email="julien.maupetit@beta.gouv.fr" },
+  "Julien Maupetit <julien.maupetit@beta.gouv.fr>",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -23,30 +24,23 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-requires-python = ">=3.9"
-license = {file = "../LICENSE"}
+license = "MIT"
 keywords = ["OCPI"]
-dependencies = [
-    "polyfactory==2.15.0",
-    "py-ocpi==0.3.1",
-    "uvicorn[standard]==0.28.0",
-]
-dynamic = ["version"]
+homepage = "https://github.com/MTES-MCT/ocpi-playground"
+repository = "https://github.com/MTES-MCT/ocpi-playground/issues"
+packages = [{ include = "playground" }]
 
-[project.urls]
-"Homepage" = "https://github.com/MTES-MCT/ocpi-playground"
-"Bug Tracker" = "https://github.com/MTES-MCT/ocpi-playground/issues"
+[tool.poetry.dependencies]
+python = "^3.9"
+polyfactory= "2.15.0"
+py-ocpi = "0.3.1"
+uvicorn = { version = "0.28.0", extras = ["standard"] }
 
-[project.optional-dependencies]
-dev = [
-    "black==24.2.0",
-    "mypy==1.9.0",
-    "pytest==7.4.4",
-    "ruff==0.3.2",
-]
-
-[tool.setuptools.dynamic]
-version = { attr = "playground.__version__" }
+[tool.poetry.group.dev.dependencies]
+black = "24.2.0"
+mypy = "1.9.0"
+pytest = "7.4.4"
+ruff = "0.3.2"
 
 # Third party packages configuration
 [tool.pytest.ini_options]
