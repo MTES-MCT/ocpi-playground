@@ -25,15 +25,18 @@ target:
 $ make bootstrap
 ```
 
-Once application docker images have been built, you can start the whole stack
+Now that application docker image has been built, you can start the whole stack
 using:
 
 ```
 $ make run
 ```
 
-You may now take a look and test the HTTP API at
-[http://localhost:8000](http://localhost:8000)
+Depending on the OCPI server you want to explore, you may take a look and test
+its HTTP API at:
+
+- CPO: [http://localhost:8010](http://localhost:8010)
+- eMSP: [http://localhost:8011](http://localhost:8011)
 
 To run tests and linters, there are commands for that! You can list them using:
 
