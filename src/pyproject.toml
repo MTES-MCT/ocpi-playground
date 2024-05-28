@@ -39,7 +39,7 @@ uvicorn = { version = "0.30.0", extras = ["standard"] }
 black = "24.4.2"
 mypy = "1.10.0"
 pytest = "8.2.1"
-ruff = "0.4.5"
+ruff = "0.4.6"
 
 # Third party packages configuration
 [tool.pytest.ini_options]
