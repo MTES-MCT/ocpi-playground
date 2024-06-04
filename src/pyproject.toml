@@ -38,7 +38,7 @@ uvicorn = { version = "0.30.1", extras = ["standard"] }
 [tool.poetry.group.dev.dependencies]
 black = "24.4.2"
 mypy = "1.10.0"
-pytest = "8.2.1"
+pytest = "8.2.2"
 ruff = "0.4.7"
 
 # Third party packages configuration
