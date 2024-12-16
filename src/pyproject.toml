@@ -31,7 +31,7 @@ packages = [{ include = "playground" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-polyfactory= "2.18.0"
+polyfactory= "2.18.1"
 py-ocpi = "0.3.1"
 uvicorn = { version = "0.34.0", extras = ["standard"] }
 
